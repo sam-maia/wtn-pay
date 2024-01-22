@@ -13,8 +13,8 @@ function App() {
   const [idioma, setIdioma] = useState('portugues')
   return (
     <Router>
-      <div className='flex md:w-96 mx-auto items-center'>
-      <img className='w-8 h-8' src={idioma == 'portugues' ?'https://cdn-icons-png.flaticon.com/512/3909/3909370.png' : 'https://cdn-icons-png.flaticon.com/512/323/323365.png'} />
+      <div className='flex md:w-96 mx-auto items-center bg-cinzaPadao'>
+      <img className='w-8 h-8 mx-3' src={idioma == 'portugues' ?'https://cdn-icons-png.flaticon.com/512/3909/3909370.png' : 'https://cdn-icons-png.flaticon.com/512/323/323365.png'} />
         <select className='m-3 px-2 py-1 text-xl border border-zinc-500 rounded-lg' onChange={(e) => setIdioma(e.target.value)}>
           <option value='portugues'>Português</option>
           <option value='espanhol'>Espanhol</option>
