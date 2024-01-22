@@ -1,6 +1,6 @@
 const FormularioPt = (props) => {
     return(
-        <form action="http://localhost:5000/rotasForm/addform/" method="POST" className="flex flex-col w-screen h-screen items-center gap-2 text-xl font-sans text-zinc-500 md:w-96 mx-auto bg-cinzaPadao overflow-y-scroll">
+        <form action="https://wtn-pay-backend.onrender.com/rotasForm/addform/" method="POST" className="flex flex-col w-screen h-screen items-center gap-2 text-xl font-sans text-zinc-500 md:w-96 mx-auto bg-cinzaPadao overflow-y-scroll">
             <img src={props.logo} className="w-2/5" />
             <label className="font-bold">Por favor, complete seus dados</label>
             <input name="indicador" type='tel' placeholder='Celular do indicador' required className="border border-zinc-500 rounded-lg p-3" />
