@@ -20,7 +20,7 @@ const FormularioPt = (props) => {
             <input name="pais" type='text' placeholder='Seu país' required className="border border-zinc-500 rounded-lg p-3" />
             <input name="moeda" type='text' placeholder='Moeda do país' required className="border border-zinc-500 rounded-lg p-3" />
             <input name="pin" type='text' maxLength='4' placeholder='Defina um PIN de 4 números' required className="border border-zinc-500 rounded-lg p-3" />
-            <input type="submit" placeholder="Enviar" className="px-6 py-3 mb-3 rounded-2xl text-white text-xl font-bold bg-zinc-600" onClick={(e) => {
+            <input type="submit" value="Enviar" className="px-6 py-3 mb-3 rounded-2xl text-white text-xl font-bold bg-zinc-600" onClick={(e) => {
                 if(pesquisaIndicador[0] == undefined || pesquisaIndicado[0] != undefined || pesquisaEmail[0] != undefined || emeil != confirmEmail){
                     e.preventDefault()
                     if(pesquisaIndicador[0] == undefined){window.alert('Numero de Celular do indicador não cadastrado!')}
