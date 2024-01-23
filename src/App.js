@@ -13,7 +13,7 @@ import './App.css';
 function App() {
   const [idioma, setIdioma] = useState('portugues')
   const cadastrados = listas('https://wtn-pay-backend.onrender.com/rotasForm')
-
+console.log(cadastrados)
   return (
     <Router>
       <div className='flex md:w-96 mx-auto items-center bg-cinzaPadao'>

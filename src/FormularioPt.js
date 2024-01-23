@@ -5,7 +5,7 @@ const FormularioPt = (props) => {
     const [indicado, setIndicado] = useState(false)
     const [emeil, setEmail] = useState(false)
     const [confirmEmail, setConfirmEmail] = useState(false)
-    let pesquisaIndicador = props.cadastrados.filter((elemento) => elemento.indicador == indicador)
+    let pesquisaIndicador = props.cadastrados.filter((elemento) => elemento.celular == indicador)
     let pesquisaIndicado = props.cadastrados.filter((elemento) => elemento.celular == indicado)
     let pesquisaEmail = props.cadastrados.filter((elemento) => elemento.email == emeil)
     return(
