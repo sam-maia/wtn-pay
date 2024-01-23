@@ -8,6 +8,7 @@ const FormularioPt = (props) => {
     let pesquisaIndicador = props.cadastrados.filter((elemento) => elemento.indicador == indicador)
     let pesquisaIndicado = props.cadastrados.filter((elemento) => elemento.celular == indicado)
     let pesquisaEmail = props.cadastrados.filter((elemento) => elemento.email == emeil)
+    
     return(
         <form action="https://wtn-pay-backend.onrender.com/rotasForm/addform/" method="POST" className="flex flex-col w-screen h-screen items-center gap-2 text-xl font-sans text-zinc-500 md:w-96 mx-auto bg-cinzaPadao overflow-y-scroll">
             <img src={props.logo} className="w-2/5" />
