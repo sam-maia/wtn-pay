@@ -16,7 +16,7 @@ const FormularioEn = (props) => {
     if(props.navegacao == 'formulario' && props.idioma == 'ingles')return(
         <form action="https://wtnpay.com/cadastros/rotasForm/addform/" method="POST" className="flex flex-col w-screen h-screen items-center gap-2 text-xl font-sans text-zinc-500 md:w-96 mx-auto bg-cinzaPadao overflow-y-scroll">
             <img src={props.logo} className="w-2/5" />
-            <label className="font-bold">Please complete your details</label>
+            <label className="font-bold">Please complete your details.</label>
             <input type='tel' placeholder={`Sponsor's mobile`} required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setIndicador(e.target.value)} />
             <input type='tel' placeholder='Your mobile number' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setIndicado(e.target.value)} />
             <input type='text' placeholder='Full name' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setNome(e.target.value)} />
