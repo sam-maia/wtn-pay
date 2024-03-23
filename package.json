@@ -1,5 +1,6 @@
 {
   "name": "wtn-pay",
+  "homepage": "https://www.wtnpay.com/cadastro",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
