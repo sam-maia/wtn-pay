@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { listas } from './FazGet';
+/*import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Carregamento from './Carregamento';
+import Nav from './Nav';
 import InicioPt from './InicioPt';
 import InicioEp from './InicioEp';
 import InicioEn from './InicioEn';
@@ -10,37 +10,90 @@ import FormularioEn from './FormularioEn';
 import ConcluidoPt from './ConcluidoPt';
 import ConcluidoEp from './ConcluidoEp';
 import ConcluidoEn from './ConcluidoEn';
-import logo from './imgs/logo.jpg'
+import logo from './imgs/logo.jpg';
 import './App.css';
 
 function App() {
-  const [idioma, setIdioma] = useState('portugues')
-  const [navegacao, setNavegacao] = useState('inicio')
-  const cadastrados = navegacao == 'formulario' ? listas('https://wtnpay.com/cadastros/rotasForm') : false
-  const carregamento = navegacao == 'formulario' && cadastrados == false ? true : false
+  const carregamento = false
 
   return (
-    <div>
-      <div className='flex md:w-96 mx-auto items-center bg-cinzaPadao'>
-        <img className='w-8 h-8 mx-3' src={idioma == 'portugues' ?'https://cdn-icons-png.flaticon.com/512/3909/3909370.png' : idioma == 'espanhol' ? 'https://cdn-icons-png.flaticon.com/512/323/323365.png' : 'https://cdn-icons-png.flaticon.com/512/197/197374.png'} />
-        <select className='m-3 px-2 py-1 text-xl border border-zinc-500 rounded-lg' onChange={(e) => setIdioma(e.target.value)}>
-          <option value='portugues'>Português</option>
-          <option value='espanhol'>Espanhol</option>
-          <option value='ingles'>Inglês</option>
-        </select>
+    <Router>
+      <div className='flex flex-col justify-center h-screen bg-cinzaPadao'>
+        <Nav />
+        <Routes>
+          <Route exact path='/' element={<InicioPt logo={logo} />} />
+          <Route exact path='/ep' element={<InicioEp logo={logo} />} />
+          <Route exact path='/en' element={<InicioEn logo={logo} />} />
+          <Route exact path='/formulario' element={<FormularioPt logo={logo} />} />
+          <Route exact path='/formulario/ep' element={<FormularioEp logo={logo} />} />
+          <Route exact path='/formulario/en' element={<FormularioEn logo={logo} />} />
+          <Route exact path='/concluidopt' element={<ConcluidoPt logo={logo} />} />
+          <Route exact path='/concluidoep' element={<ConcluidoEp logo={logo} />} />
+          <Route exact path='/concluidoen' element={<ConcluidoEn logo={logo} />} />
+        </Routes>
+        <Carregamento carregamento={carregamento} />
       </div>
-      <InicioPt logo={logo} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <InicioEp logo={logo} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <InicioEn logo={logo} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <FormularioPt logo={logo} cadastrados={cadastrados} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <FormularioEp logo={logo} cadastrados={cadastrados} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <FormularioEn logo={logo} cadastrados={cadastrados} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <ConcluidoPt logo={logo} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <ConcluidoEp logo={logo} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <ConcluidoEn logo={logo} idioma={idioma} navegacao={navegacao} setNavegacao={setNavegacao} />
-      <Carregamento carregamento={carregamento} />
-    </div>
+    </Router>
   )
 }
 
-export default App;
+export default App;*/
+
+
+
+
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Carregamento from './Carregamento'
+import Nav from './Nav'
+import InicioPt from './InicioPt'
+import InicioEp from './InicioEp'
+import InicioEn from './InicioEn'
+import FormularioPt from './FormularioPt'
+import FormularioEp from './FormularioEp'
+import FormularioEn from './FormularioEn'
+import ConcluidoPt from './ConcluidoPt'
+import ConcluidoEp from './ConcluidoEp'
+import ConcluidoEn from './ConcluidoEn'
+import logo from './imgs/logo.jpg'
+import './App.css'
+
+function App() {
+  const carregamento = false
+
+  return (
+    <Router>
+      <div className="flex flex-col h-screen bg-cinzaPadao">
+        {/* Menu fixo */}
+        <header className="fixed top-0 left-0 w-full h-16 bg-white shadow z-10">
+          <Nav />
+        </header>
+
+        {/* Conteúdo principal */}
+        <main className="flex-1 mt-16 px-4 flex justify-center items-start overflow-y-auto">
+          <div className="w-full max-w-2xl">
+            <Routes>
+              <Route path="/" element={<InicioPt logo={logo} />} />
+              <Route path="/ep" element={<InicioEp logo={logo} />} />
+              <Route path="/en" element={<InicioEn logo={logo} />} />
+
+              <Route path="/formulario" element={<FormularioPt logo={logo} />} />
+              <Route path="/formulario/ep" element={<FormularioEp logo={logo} />} />
+              <Route path="/formulario/en" element={<FormularioEn logo={logo} />} />
+
+              <Route path="/concluido" element={<ConcluidoPt logo={logo} />} />
+              <Route path="/concluido/ep" element={<ConcluidoEp logo={logo} />} />
+              <Route path="/concluido/en" element={<ConcluidoEn logo={logo} />} />
+            </Routes>
+          </div>
+        </main>
+
+        {/* Loader */}
+        <Carregamento carregamento={carregamento} />
+      </div>
+    </Router>
+  )
+}
+
+export default App
+

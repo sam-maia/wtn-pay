@@ -13,19 +13,20 @@ const FormularioEn = (props) => {
     let pesquisaIndicado = props.navegacao == 'formulario' ? props.cadastrados.filter((elemento) => elemento.celular == indicado) : false
     let pesquisaEmail = props.navegacao == 'formulario' ? props.cadastrados.filter((elemento) => elemento.email == email) : false
     console.log(props.cadastrados)
-    if(props.navegacao == 'formulario' && props.idioma == 'ingles')return(
-        <form action="https://wtnpay.com/cadastros/rotasForm/addform/" method="POST" className="flex flex-col w-screen h-screen items-center gap-2 text-xl font-sans text-zinc-500 md:w-96 mx-auto bg-cinzaPadao overflow-y-scroll">
-            <img src={props.logo} className="w-2/5" />
-            <label className="font-bold">Please complete your details.</label>
-            <input type='tel' placeholder={`Sponsor's mobile`} required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setIndicador(e.target.value)} />
-            <input type='tel' placeholder='Your mobile number' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setIndicado(e.target.value)} />
-            <input type='text' placeholder='Full name' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setNome(e.target.value)} />
-            <input type='text' placeholder='Your email' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setEmail(e.target.value)} />
-            <input type='text' placeholder='Confirm your email' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setConfirmEmail(e.target.value)} />
-            <input type='text' placeholder='Your country' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setPais(e.target.value)} />
-            <input type='text' placeholder='Currency of your country' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setMoeda(e.target.value)} />
-            <input type='text' maxLength='4' placeholder='Choose a 4-digit PIN' required className="border border-zinc-500 rounded-lg p-3" onChange={(e) => setPin(e.target.value)} />
-            <input type="submit" value="Send" className="px-6 py-3 mb-3 rounded-2xl text-white text-xl font-bold bg-zinc-600" onClick={(e) => {
+    return(
+        <form action="https://wtnpay.com/cadastros/rotasForm/addform/" method="POST" className="flex flex-col items-center w-full max-w-md mx-auto px-4 py-10 gap-4 text-base md:text-lg font-sans text-zinc-600">
+            <img src={props.logo} className="w-32 md:w-48 mb-6" />
+            <label className="font-bold text-center mb-2">Please complete your details.</label>
+
+            <input type='tel' placeholder={`Sponsor's mobile`} required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setIndicador(e.target.value)} />
+            <input type='tel' placeholder='Your mobile number' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setIndicado(e.target.value)} />
+            <input type='text' placeholder='Full name' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setNome(e.target.value)} />
+            <input type='text' placeholder='Your email' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setEmail(e.target.value)} />
+            <input type='text' placeholder='Confirm your email' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setConfirmEmail(e.target.value)} />
+            <input type='text' placeholder='Your country' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setPais(e.target.value)} />
+            <input type='text' placeholder='Currency of your country' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setMoeda(e.target.value)} />
+            <input type='text' maxLength='4' placeholder='Choose a 4-digit PIN' required className="w-full border border-zinc-400 rounded-lg p-3 tracking-widest text-center" onChange={(e) => setPin(e.target.value)} />
+            <input type="submit" value="Send" className="w-full px-6 py-3 mt-4 rounded-2xl text-white text-lg md:text-xl font-bold bg-zinc-600 hover:bg-zinc-700 transition cursor-pointer" onClick={(e) => {
                 e.preventDefault()
                 if(pesquisaIndicador[0] == undefined || pesquisaIndicado[0] != undefined || pesquisaEmail[0] != undefined || email != confirmEmail || pin.length != 4 || indicado == false || nome == false || email == false || pais == false || moeda == false){
                     if(pesquisaIndicador[0] == undefined){window.alert(`Indicator's cell phone number not registered.`)}
