@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 const Nav = () => {
     const navegar = useNavigate()
     const rotaAtiva = useLocation()
-console.log(rotaAtiva.pathname.length)
+
     return(
         <div className='fixed top-0 w-full items-center bg-cinzaPadao'>
             {/*<img className='w-8 h-8 mx-3' src={idioma == 'portugues' ?'https://cdn-icons-png.flaticon.com/512/3909/3909370.png' : idioma == 'espanhol' ? 'https://cdn-icons-png.flaticon.com/512/323/323365.png' : 'https://cdn-icons-png.flaticon.com/512/197/197374.png'} />*/}

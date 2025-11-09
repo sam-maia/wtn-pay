@@ -1,60 +1,174 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const FormularioEn = (props) => {
-    const [indicador, setIndicador] = useState(false)
-    const [indicado, setIndicado] = useState(false)
-    const [nome, setNome] = useState(false)
-    const [email, setEmail] = useState(false)
-    const [confirmEmail, setConfirmEmail] = useState(false)
-    const [pais, setPais] = useState(false)
-    const [moeda, setMoeda] = useState(false)
-    const [pin, setPin] = useState(false)
-    let pesquisaIndicador = props.navegacao == 'formulario' ? props.cadastrados.filter((elemento) => elemento.celular == indicador) : false
-    let pesquisaIndicado = props.navegacao == 'formulario' ? props.cadastrados.filter((elemento) => elemento.celular == indicado) : false
-    let pesquisaEmail = props.navegacao == 'formulario' ? props.cadastrados.filter((elemento) => elemento.email == email) : false
-    console.log(props.cadastrados)
-    return(
-        <form action="https://wtnpay.com/cadastros/rotasForm/addform/" method="POST" className="flex flex-col items-center w-full max-w-md mx-auto px-4 py-10 gap-4 text-base md:text-lg font-sans text-zinc-600">
-            <img src={props.logo} className="w-32 md:w-48 mb-6" />
-            <label className="font-bold text-center mb-2">Please complete your details.</label>
+  const navegar = useNavigate()
 
-            <input type='tel' placeholder={`Sponsor's mobile`} required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setIndicador(e.target.value)} />
-            <input type='tel' placeholder='Your mobile number' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setIndicado(e.target.value)} />
-            <input type='text' placeholder='Full name' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setNome(e.target.value)} />
-            <input type='text' placeholder='Your email' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setEmail(e.target.value)} />
-            <input type='text' placeholder='Confirm your email' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setConfirmEmail(e.target.value)} />
-            <input type='text' placeholder='Your country' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setPais(e.target.value)} />
-            <input type='text' placeholder='Currency of your country' required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setMoeda(e.target.value)} />
-            <input type='text' maxLength='4' placeholder='Choose a 4-digit PIN' required className="w-full border border-zinc-400 rounded-lg p-3 tracking-widest text-center" onChange={(e) => setPin(e.target.value)} />
-            <input type="submit" value="Send" className="w-full px-6 py-3 mt-4 rounded-2xl text-white text-lg md:text-xl font-bold bg-zinc-600 hover:bg-zinc-700 transition cursor-pointer" onClick={(e) => {
-                e.preventDefault()
-                if(pesquisaIndicador[0] == undefined || pesquisaIndicado[0] != undefined || pesquisaEmail[0] != undefined || email != confirmEmail || pin.length != 4 || indicado == false || nome == false || email == false || pais == false || moeda == false){
-                    if(pesquisaIndicador[0] == undefined){window.alert(`Indicator's cell phone number not registered.`)}
-                    if(pesquisaIndicado[0] != undefined){window.alert('Mobile number already registered.')}
-                    if(pesquisaEmail[0] != undefined){window.alert('E-mail already registered.')}
-                    if(email != confirmEmail){window.alert('Email does not match email confirmation.')}
-                    if(pin.length != 4){window.alert('Pin must contain 4 digits.')}
-                    if(indicado == false || nome == false || email == false || pais == false || moeda == false){window.alert('Complete all fields.')}
-                }else{
-                    let item = {
-                        indicador: indicador,
-                        indicado: indicado,
-                        nome: nome,
-                        email: email,
-                        pais: pais,
-                        moeda: moeda,
-                        pin: pin
-                    }
-                    console.log('formulario ok')
-                    fetch('https://wtnpay.com/cadastros/rotasForm/addform', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(item)
-                    }).then(props.setNavegacao('concluido'))
-                }
-            }} />
-      </form>
-    )
+  const [indicador, setIndicador] = useState("")
+  const [indicado, setIndicado] = useState("")
+  const [nome, setNome] = useState("")
+  const [email, setEmail] = useState("")
+  const [confirmEmail, setConfirmEmail] = useState("")
+  const [pais, setPais] = useState("")
+  const [moeda, setMoeda] = useState("")
+  const [pin, setPin] = useState("")
+
+  const [indicadorStatus, setIndicadorStatus] = useState({ carregando: false, valido: null, mensagem: "" })
+  const [indicadoStatus, setIndicadoStatus] = useState({ carregando: false, existe: null, mensagem: "" })
+  const [enviando, setEnviando] = useState(false)
+
+  return (
+    <form
+      onSubmit={async (e) => {
+        e.preventDefault()
+
+        if (!indicadorStatus.valido) return
+        if (indicadoStatus.existe) return
+        if (email !== confirmEmail) return
+        if (pin.length !== 4) return
+
+        setEnviando(true)
+
+        const item = {
+          indicador,
+          indicado,
+          nome,
+          email,
+          pais,
+          moeda,
+          pin,
+        }
+      
+        try {
+          await fetch("http://localhost:5000/rotasForm/addform", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(item),
+          })
+          navegar("/concluido/en")
+        } catch (erro) {
+          console.error("Erro ao enviar formulário:", erro)
+        } finally {
+          setEnviando(false)
+        }
+      }}
+      className="flex flex-col items-center w-full max-w-md mx-auto px-4 py-10 gap-4 text-base md:text-lg font-sans text-zinc-600"
+    >
+      <img src={props.logo} alt="Logo" className="w-32 md:w-48 mb-6" />
+      <label className="font-bold text-center mb-2">Please complete your details.</label>
+
+      <div className="w-full">
+        <input
+          type="tel"
+          placeholder="Sponsor's mobile"
+          required
+          value={indicador}
+          onChange={(e) => setIndicador(e.target.value)}
+          onBlur={async () => {
+            if (indicador.length < 8) return
+            setIndicadorStatus({ carregando: true, valido: null, mensagem: "Checking sponsor..." })
+
+            const resposta = await fetch("http://localhost:5000/rotasForm/verificar-indicador", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ indicador }),
+            })
+            const data = await resposta.json()
+          
+            if (data.existe) {
+              setIndicadorStatus({ carregando: false, valido: true, mensagem: "Sponsor found ✔️" })
+            } else {
+              setIndicadorStatus({ carregando: false, valido: false, mensagem: "Sponsor number not registered ❌" })
+            }
+          }}
+          className={`w-full border rounded-lg p-3 ${
+            indicadorStatus.valido === false ? "border-red-500" : "border-zinc-400"
+          }`}
+        />
+        <p
+          className={`text-sm mt-1 ${
+            indicadorStatus.carregando
+              ? "text-blue-500"
+              : indicadorStatus.valido
+              ? "text-green-600"
+              : "text-red-600"
+          }`}
+        >
+          {indicadorStatus.mensagem}
+        </p>
+      </div>
+
+      <div className="w-full">
+        <input
+          type="tel"
+          placeholder="Your mobile number"
+          required
+          value={indicado}
+          onChange={(e) => setIndicado(e.target.value)}
+          onBlur={async () => {
+            if (indicado.length < 8) return
+            setIndicadoStatus({ carregando: true, existe: null, mensagem: "Verifying your number..." })
+
+            const resposta = await fetch("http://localhost:5000/rotasForm/verificar-indicado", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ celular: indicado }),
+            })
+            const data = await resposta.json()
+          
+            if (data.existe) {
+              setIndicadoStatus({ carregando: false, existe: true, mensagem: "This number is already registered. ❌" })
+            } else {
+              setIndicadoStatus({ carregando: false, existe: false, mensagem: "Valid number for registration. ✔️" })
+            }
+          }}
+          className={`w-full border rounded-lg p-3 ${
+            indicadoStatus.existe === true ? "border-red-500" : "border-zinc-400"
+          }`}
+        />
+        <p
+          className={`text-sm mt-1 ${
+            indicadoStatus.carregando
+              ? "text-blue-500"
+              : indicadoStatus.existe
+              ? "text-red-600"
+              : "text-green-600"
+          }`}
+        >
+          {indicadoStatus.mensagem}
+        </p>
+      </div>
+
+      <input type="text" placeholder="Full name" required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setNome(e.target.value)} />
+      <input type="email" placeholder="Your email" required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setEmail(e.target.value)} />
+      <input type="email" placeholder="Confirm your email" required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setConfirmEmail(e.target.value)} />
+      <input type="text" placeholder="Your country" required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setPais(e.target.value)} />
+      <input type="text" placeholder="Currency of your country" required className="w-full border border-zinc-400 rounded-lg p-3" onChange={(e) => setMoeda(e.target.value)} />
+      <input type="password" placeholder="Choose a 4-digit PIN" required maxLength="4" className="w-full border border-zinc-400 rounded-lg p-3 tracking-widest text-center" onChange={(e) => setPin(e.target.value)} />
+
+      <button
+        type="submit"
+        disabled={
+          enviando ||
+          indicadorStatus.carregando ||
+          indicadoStatus.carregando ||
+          !indicadorStatus.valido ||
+          indicadoStatus.existe
+        }
+        className={`w-full px-6 py-3 mt-4 rounded-2xl text-white text-lg md:text-xl font-bold transition ${
+          enviando ||
+          indicadorStatus.carregando ||
+          indicadoStatus.carregando ||
+          !indicadorStatus.valido ||
+          indicadoStatus.existe
+            ? "bg-zinc-400 cursor-not-allowed"
+            : "bg-zinc-600 hover:bg-zinc-700 cursor-pointer"
+        }`}
+      >
+        {enviando ? "Sending..." : "Send"}
+      </button>
+    </form>
+  )
 }
 
 export default FormularioEn
