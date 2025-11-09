@@ -40,7 +40,7 @@ const FormularioEp = (props) => {
         }
       
         try {
-          await fetch("http://localhost:5000/rotasForm/addform", {
+          await fetch("https://wtn-pay-backend.onrender.com/rotasForm/addform", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item),
@@ -68,7 +68,7 @@ const FormularioEp = (props) => {
             if (indicador.length < 8) return
             setIndicadorStatus({ carregando: true, valido: null, mensagem: "Patrocinador de cheques..." })
 
-            const resposta = await fetch("http://localhost:5000/rotasForm/verificar-indicador", {
+            const resposta = await fetch("https://wtn-pay-backend.onrender.com/rotasForm/verificar-indicador", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ indicador }),
@@ -109,7 +109,7 @@ const FormularioEp = (props) => {
             if (indicado.length < 8) return
             setIndicadoStatus({ carregando: true, existe: null, mensagem: "Verificando tu número..." })
 
-            const resposta = await fetch("http://localhost:5000/rotasForm/verificar-indicado", {
+            const resposta = await fetch("https://wtn-pay-backend.onrender.com/rotasForm/verificar-indicado", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ celular: indicado }),

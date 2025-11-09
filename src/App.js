@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Navigate } from "react-router-dom"
 import Carregamento from './Carregamento'
 import Nav from './Nav'
 import InicioPt from './InicioPt'
@@ -25,15 +26,16 @@ function App(){
         <main className="flex-1 mt-16 px-4 flex justify-center items-start overflow-y-auto">
           <div className="w-full max-w-2xl">
             <Routes>
-              <Route path="/" element={<InicioPt logo={logo} />} />
+              <Route path="/" element={<Navigate to="pt" replace />} />
+              <Route path="/pt" element={<InicioPt logo={logo} />} />
               <Route path="/ep" element={<InicioEp logo={logo} />} />
               <Route path="/en" element={<InicioEn logo={logo} />} />
 
-              <Route path="/formulario" element={<FormularioPt logo={logo} />} />
+              <Route path="/formulario/pt" element={<FormularioPt logo={logo} />} />
               <Route path="/formulario/ep" element={<FormularioEp logo={logo} />} />
               <Route path="/formulario/en" element={<FormularioEn logo={logo} />} />
 
-              <Route path="/concluido" element={<ConcluidoPt logo={logo} />} />
+              <Route path="/concluido/pt" element={<ConcluidoPt logo={logo} />} />
               <Route path="/concluido/ep" element={<ConcluidoEp logo={logo} />} />
               <Route path="/concluido/en" element={<ConcluidoEn logo={logo} />} />
             </Routes>

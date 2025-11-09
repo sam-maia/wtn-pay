@@ -10,7 +10,7 @@ const InicioPt = (props) => {
         <div>Programa de recompensas</div>
         <div>Sistema de Afiliados Premium</div>
       </div>
-      <button onClick={() => navegar("/formulario")} className="px-6 py-3 rounded-2xl text-white text-lg md:text-xl font-bold bg-zinc-600 hover:bg-zinc-700 transition">Prosseguir</button>
+      <button onClick={() => navegar("/formulario/pt")} className="px-6 py-3 rounded-2xl text-white text-lg md:text-xl font-bold bg-zinc-600 hover:bg-zinc-700 transition">Prosseguir</button>
     </div>
   )
 }
