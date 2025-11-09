@@ -16,6 +16,7 @@ import './App.css'
 
 function App(){
   const carregamento = false
+  const linkBackend = 'https://wtn-pay-backend.onrender.com/'
 
   return(
     <Router>
@@ -31,9 +32,9 @@ function App(){
               <Route path="/ep" element={<InicioEp logo={logo} />} />
               <Route path="/en" element={<InicioEn logo={logo} />} />
 
-              <Route path="/formulario/pt" element={<FormularioPt logo={logo} />} />
-              <Route path="/formulario/ep" element={<FormularioEp logo={logo} />} />
-              <Route path="/formulario/en" element={<FormularioEn logo={logo} />} />
+              <Route path="/formulario/pt" element={<FormularioPt logo={logo} linkBackend={linkBackend} />} />
+              <Route path="/formulario/ep" element={<FormularioEp logo={logo} linkBackend={linkBackend} />} />
+              <Route path="/formulario/en" element={<FormularioEn logo={logo} linkBackend={linkBackend} />} />
 
               <Route path="/concluido/pt" element={<ConcluidoPt logo={logo} />} />
               <Route path="/concluido/ep" element={<ConcluidoEp logo={logo} />} />

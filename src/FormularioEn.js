@@ -40,7 +40,7 @@ const FormularioEn = (props) => {
         }
       
         try {
-          await fetch("http://localhost:5000/rotasForm/addform", {
+          await fetch(`${props.linkBackend}/rotasForm/addform`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item),
@@ -68,7 +68,7 @@ const FormularioEn = (props) => {
             if (indicador.length < 8) return
             setIndicadorStatus({ carregando: true, valido: null, mensagem: "Checking sponsor..." })
 
-            const resposta = await fetch("http://localhost:5000/rotasForm/verificar-indicador", {
+            const resposta = await fetch(`${props.linkBackend}rotasForm/verificar-indicador`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ indicador }),
